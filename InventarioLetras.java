@@ -27,3 +27,41 @@ public class InventarioLetras {
             }
         }
     }
+
+    public int size() {
+        return this.totalLetras;
+    }
+
+    public boolean isEmpty() {
+        return this.totalLetras == 0;
+    }
+
+    public int get(char letra) {
+        if (letra >= 'A' && letra <= 'Z') {
+            letra = (char)(letra + 32);
+        }
+        if (letra < 'a' || letra > 'z') {
+            throw new IllegalArgumentException("No es letra");
+        }
+        return conteoLetras[letra - 'a'];
+    }
+
+    public void set(char letra, int valor) {
+        if (letra >= 'A' && letra <= 'Z') {
+            letra = (char)(letra + 32);
+        }
+        if (letra < 'a' || letra > 'z' || valor < 0) {
+            throw new IllegalArgumentException("Error");
+        }
+        
+        int donde = letra - 'a';
+        
+        if (conteoLetras[donde] == 0 && valor > 0) {
+            letrasDiferentes++;
+        } else if (conteoLetras[donde] > 0 && valor == 0) {
+            letrasDiferentes--;
+        }
+        
+        totalLetras = totalLetras - conteoLetras[donde] + valor;
+        conteoLetras[donde] = valor;
+    }
