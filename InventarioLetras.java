@@ -65,3 +65,41 @@ public class InventarioLetras {
         totalLetras = totalLetras - conteoLetras[donde] + valor;
         conteoLetras[donde] = valor;
     }
+
+    @Override
+    public String toString() {
+        String texto = "[";
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < conteoLetras[i]; j++) {
+                texto += (char) ('a' + i);
+            }
+        }
+        return texto + "]";
+    }
+
+    public char encriptarCesar(char letra) {
+        if (letra >= 'a' && letra <= 'z') {
+            return (char) ('a' + (letra - 'a' + 3) % 26);
+        } else if (letra >= 'A' && letra <= 'Z') {
+            return (char) ('A' + (letra - 'A' + 3) % 26);
+        }
+        return letra;
+    }
+
+    public String encriptarPalabra(String palabra, int desplazamiento) {
+        String resultado = "";
+        for (int i = 0; i < palabra.length(); i++) {
+            resultado += encriptarCesar(palabra.charAt(i));
+        }
+        return resultado;
+    }
+
+    public InventarioLetras add(InventarioLetras otro) {
+        InventarioLetras nuevo = new InventarioLetras("");
+        for (int i = 0; i < 26; i++) {
+            char letraActual = (char)('a' + i);
+            int suma = this.conteoLetras[i] + otro.conteoLetras[i];
+            nuevo.set(letraActual, suma);
+        }
+        return nuevo;
+    }
