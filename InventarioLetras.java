@@ -103,3 +103,24 @@ public class InventarioLetras {
         }
         return nuevo;
     }
+
+    public InventarioLetras subtract(InventarioLetras otro) {
+        InventarioLetras nuevo = new InventarioLetras("");
+        for (int i = 0; i < 26; i++) {
+            int resta = this.conteoLetras[i] - otro.conteoLetras[i];
+            if (resta < 0) {
+                return null;
+            }
+            nuevo.set((char)('a' + i), resta);
+        }
+        return nuevo;
+    }
+
+    public InventarioLetras amplifies(int n) {
+        InventarioLetras nuevo = new InventarioLetras("");
+        for (int i = 0; i < 26; i++) {
+            nuevo.set((char)('a' + i), this.conteoLetras[i] * n);
+        }
+        return nuevo;
+    }
+}
